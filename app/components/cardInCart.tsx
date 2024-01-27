@@ -31,7 +31,7 @@ export default function CardInCart({item}: ItemProps) {
           resizeMode="contain"
           style={styles.imgCard}
         />
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, paddingEnd: 25}}>
           <Text style={styles.nameText} ellipsizeMode="tail" numberOfLines={1}>
             {item.title}
           </Text>
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     position: 'absolute',
-    right: 2,
-    top: 2,
+    right: 5,
+    top: 5,
   },
   priceText: {
     flex: 1,

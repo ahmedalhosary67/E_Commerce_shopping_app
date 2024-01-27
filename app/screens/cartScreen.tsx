@@ -50,7 +50,7 @@ export default function CartScreen() {
             color="orange"
             style={styles.checkoutBtn}
             titleStyle={{color: '#fff'}}
-            onPressFunction={() => console.warn('Done')}
+            onPressFunction={() => console.log('CheckOut')}
           />
         </View>
       </View>
@@ -63,9 +63,7 @@ const styles = StyleSheet.create({
   },
   cartTitle: {
     fontSize: 21,
-    backgroundColor: 'gray',
-    color: '#fff',
-    textAlign: 'center',
+    fontWeight: 'bold',
     padding: 10,
     marginBottom: 5,
   },
@@ -73,6 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    borderRadius: 10,
   },
   costTitle: {
     fontSize: 18,

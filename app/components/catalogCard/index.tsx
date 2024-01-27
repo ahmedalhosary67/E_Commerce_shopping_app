@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'silver',
+    backgroundColor: '#2977B7',
     marginBottom: 16,
     padding: 12,
     marginHorizontal: 4,
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   catalogText: {
+    color: '#fff',
     // fontSize: 21,
   },
 });

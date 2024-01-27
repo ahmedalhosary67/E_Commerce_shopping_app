@@ -42,7 +42,7 @@ export default function CatalogScreen({navigation, route}: any) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{alignItems: 'center', padding: 10}}>
-        <Text style={{fontSize: 21}}>Catalog: {item}</Text>
+        <Text style={{fontSize: 21}}>{item}</Text>
       </View>
       <FlatList
         data={state}
@@ -51,6 +51,10 @@ export default function CatalogScreen({navigation, route}: any) {
         )}
         numColumns={2}
         keyExtractor={(item: ProductTypes) => `${item.id}`}
+        columnWrapperStyle={{
+          justifyContent: 'space-around',
+        }}
+        contentContainerStyle={{gap: 10}}
         refreshControl={
           <RefreshControl
             refreshing={loading}

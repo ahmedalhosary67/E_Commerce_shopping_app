@@ -27,7 +27,7 @@ const CustomButton = ({
       hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
       android_ripple={{color: '#ddd'}}
       style={({pressed}) => [
-        {backgroundColor: pressed ? '#ddd' : color},
+        {backgroundColor: pressed || disabled ? '#ddd' : color},
         styles.button,
         {...style},
       ]}>

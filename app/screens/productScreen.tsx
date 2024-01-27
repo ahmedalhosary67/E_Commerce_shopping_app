@@ -39,11 +39,11 @@ export default function ProductScreen({navigate, route}: any) {
           <Text>{item.description}</Text>
         </View>
       </ScrollView>
-      <Text style={styles.priceText}>price: {item.price}$</Text>
+      <Text style={styles.priceText}>{item.price}$</Text>
       <CustomButton
         title="Add To Cart"
         onPressFunction={() => dispatch(addToCart(item))}
-        color="orange"
+        color="#2977b7"
         style={styles.addBtn}
         titleStyle={{color: '#fff'}}
       />
@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   imgCard: {
+    backgroundColor: '#FFf',
+    borderRadius: 20,
     alignSelf: 'center',
     width: '100%',
     height: 200,
@@ -68,11 +70,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   detailCont: {
-    padding: 10,
+    paddingTop: 12,
+    paddingHorizontal: 15,
+    flex: 1,
   },
   detailTexts: {
     gap: 5,
-    flex: 1,
   },
   addBtn: {
     height: 50,
@@ -82,8 +85,10 @@ const styles = StyleSheet.create({
   },
   priceText: {
     marginVertical: 14,
-    fontSize: 21,
+    fontSize: 23,
     fontWeight: 'bold',
-    marginHorizontal: 10,
+    marginHorizontal: 20,
+    alignSelf: 'flex-end',
+    color: 'orange',
   },
 });

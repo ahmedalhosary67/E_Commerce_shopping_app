@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 21,
-    // alignItems: 'center',
     fontWeight: 'bold',
   },
 });

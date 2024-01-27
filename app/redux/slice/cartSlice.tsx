@@ -20,6 +20,23 @@ const initialState: CartState = {
   },
 };
 
+const setStringValue = async (value: ProductTypes[]) => {
+  try {
+    await AsyncStorage.setItem('cart', JSON.stringify(value));
+  } catch (e) {
+    // save errorr
+  }
+
+  console.log('Done.');
+};
+export const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('cart');
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // error reading value
+  }
+};
 export const CartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -32,8 +49,10 @@ export const CartSlice = createSlice({
       findProduct
         ? (findProduct.amount += 1)
         : state.cart.items.push({...action.payload, amount: 1});
-
-      AsyncStorage.setItem('cart-data', JSON.stringify(state));
+      setStringValue(state.cart.items);
+    },
+    storageCartData: (state, action: PayloadAction<ProductTypes[]>) => {
+      state.cart.items = action.payload;
     },
     handleIncrease: (state, action: PayloadAction<number>) => {
       state.cart.items.map((item: any) => {
@@ -41,6 +60,7 @@ export const CartSlice = createSlice({
           ? {...item, amount: (item.amount += 1)}
           : item;
       });
+      setStringValue(state.cart.items);
     },
     handleDecrease: (state, action: PayloadAction<number>) => {
       state.cart.items.map((item: any) => {
@@ -48,11 +68,13 @@ export const CartSlice = createSlice({
           ? {...item, amount: (item.amount -= 1)}
           : item;
       });
+      setStringValue(state.cart.items);
     },
     handleDelete: (state, action: PayloadAction<number>) => {
       state.cart.items = state.cart.items.filter(
         (item: any) => item.id !== action.payload,
       );
+      setStringValue(state.cart.items);
     },
     handleTotalCost: state => {
       console.log(state.cart.total);
@@ -73,6 +95,7 @@ export const {
   handleIncrease,
   handleDelete,
   handleTotalCost,
+  storageCartData,
 } = CartSlice.actions;
 
 export const CartProducts = (state: RootState) => state.cart.cart;

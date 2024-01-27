@@ -6,22 +6,18 @@ import CatalogScreen from './catalogScreen';
 import ProductScreen from './productScreen';
 import CartScreen from './cartScreen';
 import HeaderComp from '../components/HeaderComp';
-import {Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {useAppDispatch} from '../hooks/reduxHook';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ProductTypes} from '../services/interfaces';
-import {addToCart} from '../redux/slice/cartSlice';
+import {getData, storageCartData} from '../redux/slice/cartSlice';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-type Props = {};
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-// const Tab = createMaterialBottomTabNavigator();
 
 function CatalogsStacks() {
   return (
     <Stack.Navigator
-      // screenOptions={{header: () => <HeaderComp />}}
-      screenOptions={{headerStyle: {backgroundColor: '#eee'}}}
+      screenOptions={{headerStyle: {backgroundColor: Colors.lighter}}}
       initialRouteName="HomePage">
       <Stack.Screen
         name="HomePage"
@@ -30,41 +26,23 @@ function CatalogsStacks() {
       />
       <Stack.Screen name="Catalog" component={CatalogScreen} />
       <Stack.Screen name="Product Details" component={ProductScreen} />
-      {/* <Stack.Screen name="Cart" component={CartScreen} /> */}
     </Stack.Navigator>
   );
 }
-export default function Root(props: Props) {
+export default function Root() {
   const dispatch = useAppDispatch();
   React.useEffect(() => {
-    const localStore: any = AsyncStorage.getItem('cartData');
-    // console.log(localStore);
-    // console.log(localStore);
-
-    // localStore &&
-    // localStore?.items?.map((el: ProductTypes) => dispatch(addToCart(el)));
+    dispatch(getData).then(res => dispatch(storageCartData(res)));
   }, []);
+
   return (
-    <Tab.Navigator
-      screenOptions={() => ({
-        tabBarActiveTintColor: '#39a935',
-        tabBarActiveBackgroundColor: '#eee',
-        tabBarColor: '#fff',
-        headerShown: false,
-        tabBarHideOnKeyboard: true,
-        tabBarLabelStyle: {
-          fontSize: 14,
-        },
-      })}>
+    <Tab.Navigator screenOptions={tapOptions}>
       <Tab.Screen
         name="Home"
         options={{
           tabBarIcon: () => (
             <Image
-              style={{
-                width: 30,
-                height: 30,
-              }}
+              style={styles.footerIcon}
               source={require('../assets/home2.png')}
             />
           ),
@@ -76,10 +54,7 @@ export default function Root(props: Props) {
         options={{
           tabBarIcon: () => (
             <Image
-              style={{
-                width: 40,
-                height: 40,
-              }}
+              style={styles.footerIcon}
               source={require('../assets/cart.png')}
             />
           ),
@@ -89,3 +64,21 @@ export default function Root(props: Props) {
     </Tab.Navigator>
   );
 }
+
+const tapOptions = () => ({
+  tabBarActiveTintColor: '#77722e',
+  tabBarActiveBackgroundColor: '#eee',
+  tabBarColor: '#fff',
+  headerShown: false,
+  tabBarHideOnKeyboard: true,
+  tabBarLabelStyle: {
+    fontSize: 12,
+  },
+});
+
+const styles = StyleSheet.create({
+  footerIcon: {
+    width: 30,
+    height: 30,
+  },
+});

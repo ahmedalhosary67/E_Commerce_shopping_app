@@ -46,15 +46,11 @@ export default function ProductCard({item, onClick}: ItemProps) {
 
 const styles = StyleSheet.create({
   cardCont: {
-    // alignSelf: 'flex-start',
-    flex: 1,
     borderRadius: 10,
-    marginHorizontal: 5,
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    // height: 120,
+    width: '48%',
     backgroundColor: '#fff',
-    marginBottom: 10,
     paddingVertical: 12,
     paddingHorizontal: 7,
   },
